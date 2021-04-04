@@ -1,2 +1,3 @@
-# PyGamePacman
-My attempt at creating Pacman in PyGame
+# PyGame Pacman
+
+My attempt at creating Pacman in PyGame.
