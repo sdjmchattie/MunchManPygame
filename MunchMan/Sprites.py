@@ -4,25 +4,31 @@ import Colors
 
 TILE_SIZE = 25
 FPS = 60  # Frames Per Second
-MPS = 3   # Munches Per Second
 
 class Pacman(pygame.sprite.Sprite):
   def __init__(self, center):
     super(Pacman, self).__init__()
     self.surf = pygame.Surface((TILE_SIZE, TILE_SIZE))
     self.rect = self.surf.get_rect(center = center)
-    self.mouth_size = 0
+    self.frames_per_loop = (FPS / 3)
     self.frame = 0
 
   def update(self):
-    self.mouth_size = ((FPS / (MPS * 2)) - abs(self.frame % (FPS / MPS) - (FPS / (MPS * 2)))) / (FPS / MPS)
-    self.frame += 1
+    self.frame = (self.frame + 1) % self.frames_per_loop
 
   def draw(self):
+    # Draw Pacman's body
     pygame.draw.circle(self.surf, Colors.YELLOW, (TILE_SIZE / 2, TILE_SIZE / 2), TILE_SIZE * 0.4)
+
+    # Cut out the mouth triangle
+    half_loop = self.frames_per_loop / 2
+    mouth_size = half_loop - abs(self.frame - half_loop)
+    mouth_y = TILE_SIZE * mouth_size / self.frames_per_loop
     pygame.draw.polygon(self.surf, Colors.CLEAR, [
       (TILE_SIZE / 2, TILE_SIZE / 2),
-      (TILE_SIZE, (TILE_SIZE / 2) - (TILE_SIZE * self.mouth_size)),
-      (TILE_SIZE, (TILE_SIZE / 2) + (TILE_SIZE * self.mouth_size))
+      (TILE_SIZE, (TILE_SIZE / 2) - mouth_y),
+      (TILE_SIZE, (TILE_SIZE / 2) + mouth_y)
     ])
+
+    # Face Pacman in the correct direction
     self.surf = pygame.transform.rotate(self.surf, 90)
