@@ -33,3 +33,12 @@ class Pacman(pygame.sprite.Sprite):
 
     # Face Pacman in the correct direction
     self.surf = pygame.transform.rotate(self.surf, 90)
+
+class WallShape(Enum):
+  Single = auto()   # Single dot with no adjacent walls.
+  End = auto()      # An end with one adjacent wall piece,
+                    # default joining at top.
+  Corner = auto()   # An L shape, default like the letter L.
+  Straight = auto() # A straight piece, default like letter I.
+  Tee = auto()      # A tee piece, default upside down T.
+  Cross = auto()    # A cross joining all four directions.
