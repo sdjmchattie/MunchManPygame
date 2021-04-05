@@ -1,6 +1,6 @@
+from colours import DARK_GREY
 import pygame
-import Colors
-import Sprites
+from sprites import Pacman
 
 
 SCREEN_WIDTH = 525
@@ -10,7 +10,7 @@ pygame.init()
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-pacman = Sprites.Pacman((SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))
+pacman = Pacman((SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))
 
 all_sprites = pygame.sprite.Group()
 all_sprites.add(pacman)
@@ -21,7 +21,7 @@ while running:
       if event.type == pygame.QUIT:
           running = False
 
-  screen.fill(Colors.DARK_GREY)
+  screen.fill(DARK_GREY)
 
   for sprite in all_sprites:
     sprite.update()

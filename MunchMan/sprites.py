@@ -1,5 +1,6 @@
+from colours import CLEAR, YELLOW
+from enum import Enum, auto
 import pygame
-import Colors
 
 
 TILE_SIZE = 25
@@ -18,13 +19,13 @@ class Pacman(pygame.sprite.Sprite):
 
   def draw(self):
     # Draw Pacman's body
-    pygame.draw.circle(self.surf, Colors.YELLOW, (TILE_SIZE / 2, TILE_SIZE / 2), TILE_SIZE * 0.4)
+    pygame.draw.circle(self.surf, YELLOW, (TILE_SIZE / 2, TILE_SIZE / 2), TILE_SIZE * 0.4)
 
     # Cut out the mouth triangle
     half_loop = self.frames_per_loop / 2
     mouth_size = half_loop - abs(self.frame - half_loop)
     mouth_y = TILE_SIZE * mouth_size / self.frames_per_loop
-    pygame.draw.polygon(self.surf, Colors.CLEAR, [
+    pygame.draw.polygon(self.surf, CLEAR, [
       (TILE_SIZE / 2, TILE_SIZE / 2),
       (TILE_SIZE, (TILE_SIZE / 2) - mouth_y),
       (TILE_SIZE, (TILE_SIZE / 2) + mouth_y)
